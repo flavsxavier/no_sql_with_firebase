@@ -20,6 +20,24 @@ class FirebaseDataSourceImplementation implements FirebaseDataSource {
   }) async {
     final newItem = TodoItemModel(description: description, value: value);
 
-    await firestore.collection('todo_items').add(newItem.toMap());
+    await firestore.collection(collectionName).add(newItem.toMap());
+  }
+
+  @override
+  Future<void> toggleItemValueInCollection(
+      {String description, bool value, String collectionName}) async {
+    final item = TodoItemModel(description: description, value: value);
+
+    final documents = await firestore
+        .collection(collectionName)
+        .where('description', isEqualTo: description)
+        .getDocuments();
+
+    final documentID = documents.documents.first.documentID;
+
+    await firestore
+        .collection(collectionName)
+        .document(documentID)
+        .updateData(item.toMap());
   }
 }

@@ -29,4 +29,20 @@ class FirebaseRepositoryImplementation implements FirebaseRepository {
       return left(OperationFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, void>> toggleItemValueInCollection(
+      TodoItem item) async {
+    try {
+      return right(
+        await dataSource.toggleItemValueInCollection(
+          description: item.description,
+          value: item.value,
+          collectionName: 'todo_items',
+        ),
+      );
+    } on FirebaseException {
+      return left(OperationFailure());
+    }
+  }
 }

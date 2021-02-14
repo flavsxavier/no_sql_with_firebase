@@ -30,4 +30,14 @@ class TodoItemModel extends TodoItem {
 
   factory TodoItemModel.fromJson(String source) =>
       TodoItemModel.fromMap(json.decode(source));
+
+  TodoItemModel copyWith({
+    String description,
+    bool value,
+  }) {
+    return TodoItemModel(
+      description: description ?? this.description,
+      value: value ?? this.value,
+    );
+  }
 }

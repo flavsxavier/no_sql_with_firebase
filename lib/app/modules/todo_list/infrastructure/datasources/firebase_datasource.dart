@@ -4,4 +4,10 @@ abstract class FirebaseDataSource {
     bool value,
     String collectionName,
   });
+
+  Future<void> toggleItemValueInCollection({
+    String description,
+    bool value,
+    String collectionName,
+  });
 }

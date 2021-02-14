@@ -4,13 +4,13 @@ import 'package:flutter_modular/flutter_modular.dart';
 import '../../../../../core/error/failures.dart';
 import '../../../../../core/usecases/usecases.dart';
 import '../entities/todo_item.dart';
-import '../repositories/firebase_repository.dart';
+import '../repositories/todo_repository.dart';
 
 part 'toggle_item_value_in_collection.g.dart';
 
 @Injectable()
 class ToggleItemValueInCollection implements AsyncUsecase<void, TodoItem> {
-  final FirebaseRepository repository;
+  final TodoRepository repository;
 
   ToggleItemValueInCollection(this.repository);
 

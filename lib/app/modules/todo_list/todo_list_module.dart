@@ -4,7 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'domain/usecases/add_new_item_to_collection.dart';
 import 'domain/usecases/toggle_item_value_in_collection.dart';
 import 'external/datasources/firebase_datasource_implementation.dart';
-import 'infrastructure/repositories/firebase_repository_implementation.dart';
+import 'infrastructure/repositories/todo_repository_implementation.dart';
 import 'presentation/controllers/todo_list_controller.dart';
 import 'presentation/pages/todo_list_page.dart';
 
@@ -14,7 +14,7 @@ class TodoListModule extends ChildModule {
         $TodoListController,
         $AddNewItemToCollection,
         $ToggleItemValueInCollection,
-        $FirebaseRepositoryImplementation,
+        $TodoRepositoryImplementation,
         $FirebaseDataSourceImplementation,
         Bind((i) => Firestore.instance),
       ];

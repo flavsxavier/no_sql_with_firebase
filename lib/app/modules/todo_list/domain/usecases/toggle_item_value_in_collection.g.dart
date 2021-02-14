@@ -7,7 +7,7 @@ part of 'toggle_item_value_in_collection.dart';
 // **************************************************************************
 
 final $ToggleItemValueInCollection = BindInject(
-  (i) => ToggleItemValueInCollection(i<FirebaseRepository>()),
+  (i) => ToggleItemValueInCollection(i<TodoRepository>()),
   singleton: true,
   lazy: true,
 );

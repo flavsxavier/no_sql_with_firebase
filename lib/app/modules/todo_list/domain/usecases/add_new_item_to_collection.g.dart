@@ -7,7 +7,7 @@ part of 'add_new_item_to_collection.dart';
 // **************************************************************************
 
 final $AddNewItemToCollection = BindInject(
-  (i) => AddNewItemToCollection(i<FirebaseRepository>()),
+  (i) => AddNewItemToCollection(i<TodoRepository>()),
   singleton: true,
   lazy: true,
 );

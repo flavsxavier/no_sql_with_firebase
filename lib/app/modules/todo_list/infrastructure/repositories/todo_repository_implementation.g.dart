@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'firebase_repository_implementation.dart';
+part of 'todo_repository_implementation.dart';
 
 // **************************************************************************
 // InjectionGenerator
 // **************************************************************************
 
-final $FirebaseRepositoryImplementation = BindInject(
-  (i) => FirebaseRepositoryImplementation(i<FirebaseDataSource>()),
+final $TodoRepositoryImplementation = BindInject(
+  (i) => TodoRepositoryImplementation(i<FirebaseDataSource>()),
   singleton: true,
   lazy: true,
 );

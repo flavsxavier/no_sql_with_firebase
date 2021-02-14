@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:no_sql_with_firebase/app/modules/todo_list/external/models/todo_item_model.dart';
+import '../../external/models/todo_item_model.dart';
 
 import '../controllers/todo_list_controller.dart';
 

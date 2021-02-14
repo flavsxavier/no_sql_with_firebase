@@ -4,16 +4,16 @@ import 'package:flutter_modular/flutter_modular.dart';
 import '../../../../../core/error/exceptions.dart';
 import '../../../../../core/error/failures.dart';
 import '../../domain/entities/todo_item.dart';
-import '../../domain/repositories/firebase_repository.dart';
+import '../../domain/repositories/todo_repository.dart';
 import '../datasources/firebase_datasource.dart';
 
-part 'firebase_repository_implementation.g.dart';
+part 'todo_repository_implementation.g.dart';
 
 @Injectable()
-class FirebaseRepositoryImplementation implements FirebaseRepository {
+class TodoRepositoryImplementation implements TodoRepository {
   final FirebaseDataSource dataSource;
 
-  FirebaseRepositoryImplementation(this.dataSource);
+  TodoRepositoryImplementation(this.dataSource);
 
   @override
   Future<Either<Failure, void>> addNewItemToCollection(TodoItem newItem) async {

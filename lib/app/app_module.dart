@@ -1,18 +1,16 @@
-import 'app_controller.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter/material.dart';
-import 'package:no_sql_with_firebase/app/app_widget.dart';
-import 'package:no_sql_with_firebase/app/modules/home/home_module.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+
+import 'app_widget.dart';
+import 'modules/todo_list/todo_list_module.dart';
 
 class AppModule extends MainModule {
   @override
-  List<Bind> get binds => [
-        $AppController,
-      ];
+  List<Bind> get binds => [];
 
   @override
   List<ModularRouter> get routers => [
-        ModularRouter(Modular.initialRoute, module: HomeModule()),
+        ModularRouter(Modular.initialRoute, module: TodoListModule()),
       ];
 
   @override

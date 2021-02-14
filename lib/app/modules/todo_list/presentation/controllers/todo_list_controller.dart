@@ -1,12 +1,12 @@
 import 'package:mobx/mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-part 'home_controller.g.dart';
+part 'todo_list_controller.g.dart';
 
 @Injectable()
-class HomeController = _HomeControllerBase with _$HomeController;
+class TodoListController = _TodoListControllerBase with _$TodoListController;
 
-abstract class _HomeControllerBase with Store {
+abstract class _TodoListControllerBase with Store {
   @observable
   int value = 0;
 

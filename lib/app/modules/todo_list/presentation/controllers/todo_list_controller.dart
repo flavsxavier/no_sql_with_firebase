@@ -1,10 +1,11 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import 'package:no_sql_with_firebase/app/modules/todo_list/domain/usecases/delete_item_from_collection.dart';
 
+import '../../../../../core/usecases/usecases.dart';
 import '../../domain/entities/todo_item.dart';
 import '../../domain/usecases/add_new_item_to_collection.dart';
+import '../../domain/usecases/delete_item_from_collection.dart';
+import '../../domain/usecases/get_all_items_from_collection.dart';
 import '../../domain/usecases/toggle_item_value_in_collection.dart';
 import '../../external/models/todo_item_model.dart';
 
@@ -14,11 +15,13 @@ part 'todo_list_controller.g.dart';
 class TodoListController = _TodoListControllerBase with _$TodoListController;
 
 abstract class _TodoListControllerBase with Store {
+  final GetAllItemsFromCollection getAllItemsFromCollection;
   final AddNewItemToCollection addNewItemToCollection;
   final DeleteItemFromCollection deleteItemFromCollection;
   final ToggleItemValueInCollection toggleItemValueInCollection;
 
   _TodoListControllerBase(
+    this.getAllItemsFromCollection,
     this.addNewItemToCollection,
     this.deleteItemFromCollection,
     this.toggleItemValueInCollection,
@@ -31,15 +34,23 @@ abstract class _TodoListControllerBase with Store {
 
   @action
   void _getAllTodoItems() {
-    var dataStream = Firestore.instance.collection('todo_items').snapshots();
+    var dataStream = getAllItemsFromCollection(NoParams());
 
-    dataStream.listen((snapshot) {
-      todoItems = snapshot.documents
-          .map<TodoItemModel>(
-              (document) => TodoItemModel.fromMap(document.data))
-          .toList()
-          .asObservable();
-    });
+    dataStream.fold(
+      (error) => print('$error error occurred when trying to get all items'),
+      (data) => data.listen(
+        (snapshot) {
+          final items = snapshot.documents
+              .map<TodoItemModel>(
+                  (document) => TodoItemModel.fromMap(document.data))
+              .toList();
+
+          todoItems = ObservableList.of(items);
+
+          print('All items has been updated');
+        },
+      ),
+    );
   }
 
   @action

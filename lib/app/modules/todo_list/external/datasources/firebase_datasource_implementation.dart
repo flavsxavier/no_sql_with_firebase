@@ -53,4 +53,15 @@ class FirebaseDataSourceImplementation implements FirebaseDataSource {
 
     await firestore.collection(collectionName).document(documentID).delete();
   }
+
+  @override
+  Stream getAllItemsFromCollection() {
+    var stream = Firestore.instance
+        .collection('todo_items')
+        .orderBy('value')
+        .orderBy('description')
+        .snapshots();
+
+    return stream;
+  }
 }

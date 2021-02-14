@@ -7,8 +7,11 @@ part of 'todo_list_controller.dart';
 // **************************************************************************
 
 final $TodoListController = BindInject(
-  (i) => TodoListController(i<AddNewItemToCollection>(),
-      i<DeleteItemFromCollection>(), i<ToggleItemValueInCollection>()),
+  (i) => TodoListController(
+      i<GetAllItemsFromCollection>(),
+      i<AddNewItemToCollection>(),
+      i<DeleteItemFromCollection>(),
+      i<ToggleItemValueInCollection>()),
   singleton: true,
   lazy: true,
 );

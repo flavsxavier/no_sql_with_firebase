@@ -40,7 +40,6 @@ class TodoListPage extends StatelessWidget {
           return ListView.builder(
             itemCount: _controller.todoItems.length,
             itemBuilder: (context, index) {
-              print(_controller.todoItems);
               return ListTile(
                 title: Text(_controller.todoItems.elementAt(index).description),
                 trailing: Checkbox(

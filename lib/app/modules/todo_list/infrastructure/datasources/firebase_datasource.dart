@@ -1,4 +1,6 @@
 abstract class FirebaseDataSource {
+  Stream<dynamic> getAllItemsFromCollection();
+
   Future<void> addNewItemToCollection({
     String description,
     bool value,

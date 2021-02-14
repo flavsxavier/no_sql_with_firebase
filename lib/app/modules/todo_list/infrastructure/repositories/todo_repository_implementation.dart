@@ -59,4 +59,13 @@ class TodoRepositoryImplementation implements TodoRepository {
       return left(OperationFailure());
     }
   }
+
+  @override
+  Either<Failure, Stream> getAllItemsFromCollection() {
+    try {
+      return right(dataSource.getAllItemsFromCollection());
+    } on FirebaseException {
+      return left(OperationFailure());
+    }
+  }
 }

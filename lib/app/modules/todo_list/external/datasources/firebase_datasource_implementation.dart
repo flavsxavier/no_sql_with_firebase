@@ -28,16 +28,29 @@ class FirebaseDataSourceImplementation implements FirebaseDataSource {
       {String description, bool value, String collectionName}) async {
     final item = TodoItemModel(description: description, value: value);
 
-    final documents = await firestore
+    final snapshot = await firestore
         .collection(collectionName)
         .where('description', isEqualTo: description)
         .getDocuments();
 
-    final documentID = documents.documents.first.documentID;
+    final documentID = snapshot.documents.first.documentID;
 
     await firestore
         .collection(collectionName)
         .document(documentID)
         .updateData(item.toMap());
+  }
+
+  @override
+  Future<void> deleteItemFromCollection(
+      {String description, String collectionName}) async {
+    final snapshot = await firestore
+        .collection(collectionName)
+        .where('description', isEqualTo: description)
+        .getDocuments();
+
+    final documentID = snapshot.documents.first.documentID;
+
+    await firestore.collection(collectionName).document(documentID).delete();
   }
 }

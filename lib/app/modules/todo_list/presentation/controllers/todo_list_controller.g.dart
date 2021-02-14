@@ -7,8 +7,8 @@ part of 'todo_list_controller.dart';
 // **************************************************************************
 
 final $TodoListController = BindInject(
-  (i) => TodoListController(
-      i<AddNewItemToCollection>(), i<ToggleItemValueInCollection>()),
+  (i) => TodoListController(i<AddNewItemToCollection>(),
+      i<DeleteItemFromCollection>(), i<ToggleItemValueInCollection>()),
   singleton: true,
   lazy: true,
 );
@@ -41,6 +41,15 @@ mixin _$TodoListController on _TodoListControllerBase, Store {
   @override
   Future<void> addNewTodoItem(TodoItem newItem) {
     return _$addNewTodoItemAsyncAction.run(() => super.addNewTodoItem(newItem));
+  }
+
+  final _$deleteTodoItemAsyncAction =
+      AsyncAction('_TodoListControllerBase.deleteTodoItem');
+
+  @override
+  Future<void> deleteTodoItem({int itemIndex}) {
+    return _$deleteTodoItemAsyncAction
+        .run(() => super.deleteTodoItem(itemIndex: itemIndex));
   }
 
   final _$toggleItemValueAsyncAction =

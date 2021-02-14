@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:no_sql_with_firebase/app/modules/todo_list/domain/usecases/delete_item_from_collection.dart';
 
 import 'domain/usecases/add_new_item_to_collection.dart';
 import 'domain/usecases/toggle_item_value_in_collection.dart';
@@ -13,6 +14,7 @@ class TodoListModule extends ChildModule {
   List<Bind> get binds => [
         $TodoListController,
         $AddNewItemToCollection,
+        $DeleteItemFromCollection,
         $ToggleItemValueInCollection,
         $TodoRepositoryImplementation,
         $FirebaseDataSourceImplementation,

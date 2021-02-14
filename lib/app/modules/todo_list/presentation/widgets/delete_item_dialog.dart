@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-class NewItemDialog extends StatelessWidget {
-  final Function(String typedText) onAdd;
+class DeleteItemDialog extends StatelessWidget {
+  final Function onDelete;
 
-  final _descriptionTextController = TextEditingController();
-
-  NewItemDialog({this.onAdd});
+  const DeleteItemDialog({this.onDelete});
 
   @override
   Widget build(BuildContext context) {
@@ -18,17 +16,7 @@ class NewItemDialog extends StatelessWidget {
           currentFocus.focusedChild.unfocus();
       },
       child: AlertDialog(
-        title: Text('Add a new item'),
-        content: SingleChildScrollView(
-          child: ListBody(
-            children: <Widget>[
-              TextField(
-                controller: _descriptionTextController,
-                decoration: InputDecoration(labelText: 'Item description'),
-              ),
-            ],
-          ),
-        ),
+        title: Text('Delete this item?'),
         actions: <Widget>[
           TextButton(
             child: Text(
@@ -42,13 +30,13 @@ class NewItemDialog extends StatelessWidget {
           ),
           TextButton(
             child: Text(
-              'Add new item'.toUpperCase(),
+              'Delete item'.toUpperCase(),
               style: Theme.of(context)
                   .textTheme
                   .button
                   .copyWith(color: Theme.of(context).primaryColor),
             ),
-            onPressed: () => onAdd(_descriptionTextController.text),
+            onPressed: onDelete,
           ),
         ],
       ),

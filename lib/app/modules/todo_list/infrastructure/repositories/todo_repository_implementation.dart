@@ -45,4 +45,18 @@ class TodoRepositoryImplementation implements TodoRepository {
       return left(OperationFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, void>> deleteItemFromCollection(TodoItem item) async {
+    try {
+      return right(
+        await dataSource.deleteItemFromCollection(
+          description: item.description,
+          collectionName: 'todo_items',
+        ),
+      );
+    } on FirebaseException {
+      return left(OperationFailure());
+    }
+  }
 }

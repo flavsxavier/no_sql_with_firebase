@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
+import 'package:no_sql_with_firebase/app/modules/todo_list/domain/usecases/delete_item_from_collection.dart';
 
 import '../../domain/entities/todo_item.dart';
 import '../../domain/usecases/add_new_item_to_collection.dart';
@@ -14,10 +15,12 @@ class TodoListController = _TodoListControllerBase with _$TodoListController;
 
 abstract class _TodoListControllerBase with Store {
   final AddNewItemToCollection addNewItemToCollection;
+  final DeleteItemFromCollection deleteItemFromCollection;
   final ToggleItemValueInCollection toggleItemValueInCollection;
 
   _TodoListControllerBase(
     this.addNewItemToCollection,
+    this.deleteItemFromCollection,
     this.toggleItemValueInCollection,
   ) {
     _getAllTodoItems();
@@ -48,6 +51,19 @@ abstract class _TodoListControllerBase with Store {
           '$error error occurred when trying to add ${newItem.description}'),
       (data) =>
           print('${newItem.description} was added with value ${newItem.value}'),
+    );
+  }
+
+  @action
+  Future<void> deleteTodoItem({int itemIndex}) async {
+    final item = todoItems.elementAt(itemIndex);
+    final operationResult = await deleteItemFromCollection(item);
+
+    operationResult.fold(
+      (error) => print(
+          '$error error occurred when trying to delete ${item.description}'),
+      (data) =>
+          print('${item.description} with value ${item.value} was deleted'),
     );
   }
 
